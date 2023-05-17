@@ -1,0 +1,42 @@
+﻿@model Company
+
+
+@{
+    ViewData["Title"] = "Create New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Create Company</h1>
+
+@using (Html.BeginForm("CreateNew", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address" class="control-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+
+    @foreach (var kvp in ViewBag.Others)
+    {
+        <div class="form-group">
+            <label>@kvp.Key</label>
+            <input type="text" name="@kvp.Key" value="@kvp.Value" class="form-control" />
+        </div>
+        <span class="text-danger"></span>
+    }
+
+
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+}

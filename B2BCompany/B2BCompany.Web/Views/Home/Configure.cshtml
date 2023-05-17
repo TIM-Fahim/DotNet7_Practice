@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CompanyConfig>
+@{
+    ViewData["Title"] = "Configure Values";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Field List</title>
+</head>
+<body>
+    <h2>Field List</h2>
+
+    <table>
+        <tr>
+            <th>Field Name</th>
+            <th>Field Type</th>
+        </tr>
+        @foreach (var field in Model)
+        {
+            <tr>
+                <td>@field.Name</td>
+                <td>@field.Type</td>
+            </tr>
+        }
+    </table>
+
+    <h3>Add New Field</h3>
+    <form method="post" action="@Url.Action("AddField", "Home")">
+        <div>
+            <label for="Name">Field Name:</label>
+            <input type="text" name="Name" id="fieldName" required />
+        </div>
+        <div>
+            <label for="Type">Field Type:</label>
+            <input type="text" name="Type" id="Type" required />
+        </div>
+        <input type="submit" value="Add Field" />
+    </form>
+</body>
+</html>

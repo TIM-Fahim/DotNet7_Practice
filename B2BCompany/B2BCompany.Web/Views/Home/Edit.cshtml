@@ -1,0 +1,55 @@
+﻿@model Company
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+@using (Html.BeginForm("EditSave", "Home", FormMethod.Post))
+{
+    <div>
+        <h4>Company</h4>
+        <hr />
+        <dl class="row">
+          
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.UserID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.EditorFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.EditorFor(model => model.Address)
+            </dd>
+            @foreach (var kvp in ViewBag.Others as Dictionary<string, string>)
+            {
+                <div class="form-group">
+                    <label>@kvp.Key</label>
+                    <input type="text" name="@kvp.Key" value="@kvp.Value" class="form-control" />
+                </div>
+                <span class="text-danger"></span>
+                
+            }
+        </dl>
+        
+    </div>
+
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
